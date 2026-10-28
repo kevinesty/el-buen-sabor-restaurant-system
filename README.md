@@ -1,18 +1,18 @@
-# 🍽️ El Buen Sabor — Restaurant Management System
+# 🍽️ El Buen Sabor — Sistema de Gestión de Restaurante
 
-A full-stack restaurant management web application built with Flask and MySQL. Designed to manage dishes, user reviews, and restaurant statistics through a responsive and user-friendly interface.
+Aplicación web full-stack desarrollada con Flask y MySQL. Diseñada para gestionar platos, reseñas de usuarios y estadísticas del restaurante mediante una interfaz adaptable e intuitiva.
 
-## ✨ Features
+## ✨ Funcionalidades
 
-- **User Authentication:** Registration, login, and secure password hashing.
-- **Role-Based Access Control:** Separate permissions for administrators and regular users.
-- **Dish Management:** Create, edit, and delete dishes with descriptions, prices, and images.
-- **Reviews & Comments:** Users can share feedback and interact with dishes.
-- **Likes & Dislikes:** Track user preferences for restaurant dishes.
-- **Dashboard & Statistics:** Visualize restaurant activity and user interactions.
-- **Responsive Interface:** User-friendly experience across different screen sizes.
+- **Autenticación de usuarios:** Registro, inicio de sesión y almacenamiento seguro de contraseñas mediante hash.
+- **Control de acceso por roles:** Permisos diferenciados para administradores y usuarios regulares.
+- **Gestión de platos:** Crear, editar y eliminar platos con sus descripciones, precios e imágenes.
+- **Reseñas y comentarios:** Los usuarios pueden compartir sus opiniones e interactuar con los platos.
+- **Likes y dislikes:** Registro de las preferencias de los usuarios sobre los platos del restaurante.
+- **Panel de estadísticas:** Visualización de la actividad del restaurante y las interacciones de los usuarios.
+- **Interfaz adaptable:** Experiencia de usuario intuitiva en diferentes tamaños de pantalla.
 
-## 🛠️ Technologies
+## 🛠️ Tecnologías
 
 - Python
 - Flask
@@ -20,46 +20,48 @@ A full-stack restaurant management web application built with Flask and MySQL. D
 - HTML5
 - CSS3
 - JavaScript
-- Git & GitHub
+- Git y GitHub
 
-## 🏗️ Architecture
+## 🏗️ Arquitectura
 
-The application follows the **Model-View-Controller (MVC)** pattern to organize its components:
+La aplicación sigue el patrón **Modelo-Vista-Controlador (MVC)** para organizar sus componentes:
 
-- **Models:** Database operations and data management.
-- **Views:** HTML templates rendered using Flask.
-- **Controllers:** Application logic and request handling.
-- **Routes:** Application endpoints and navigation.
+- **Modelos:** Operaciones con la base de datos y gestión de datos.
+- **Vistas:** Plantillas HTML renderizadas mediante Flask.
+- **Controladores:** Lógica de la aplicación y gestión de solicitudes.
+- **Rutas:** Endpoints de la aplicación y navegación.
 
-## 📸 Screenshots
+## 📸 Capturas de pantalla
 
-## 📸 Screenshots
+### Página principal
 
-### Home page
-![Home page](screenshots/home.png)
+![Página principal](screenshots/home.png)
 
-### Login
-![Login](screenshots/login.png)
+### Inicio de sesión
 
-### Admin dashboard
-![Admin dashboard](screenshots/admin.png)
+![Inicio de sesión](screenshots/login.png)
 
-### Statistics dashboard
-![Statistics dashboard](screenshots/dashboard.png)
+### Panel de administración
 
-## 🚀 Getting Started
+![Panel de administración](screenshots/admin.png)
 
-To run the project locally, you need Python, MySQL, and the required dependencies.
+### Panel de estadísticas
 
-1. Clone the repository.
-2. Install the dependencies from `requirements.txt`.
-3. Configure your local environment variables in a `.env` file.
-4. Set up the MySQL database using the provided SQL files.
-5. Run the Flask application.
+![Panel de estadísticas](screenshots/dashboard.png)
 
-## 🔐 Environment Variables
+## 🚀 Cómo ejecutar el proyecto
 
-Configure the following variables in your local `.env` file:
+Para ejecutar el proyecto localmente, necesitas Python, MySQL y las dependencias requeridas.
+
+1. Clona el repositorio.
+2. Instala las dependencias desde `requirements.txt`.
+3. Configura las variables de entorno locales en un archivo `.env`.
+4. Configura la base de datos MySQL utilizando los archivos SQL proporcionados.
+5. Ejecuta la aplicación Flask.
+
+## 🔐 Variables de entorno
+
+Configura las siguientes variables en tu archivo `.env` local:
 
 - `SECRET_KEY`
 - `MYSQL_HOST`
@@ -68,9 +70,9 @@ Configure the following variables in your local `.env` file:
 - `MYSQL_PASSWORD`
 - `MYSQL_DB`
 
-**Do not commit your `.env` file or credentials to GitHub.**
+**No subas tu archivo `.env` ni tus credenciales a GitHub.**
 
-## 👨‍💻 Author
+## 👨‍💻 Autor
 
 Kevin Carvallo
 
