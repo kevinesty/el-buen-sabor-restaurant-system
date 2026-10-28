@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Mi perfil — El Buen Sabor{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-title">Mi <span>Perfil</span></h1>
+    <p class="page-sub">Información de tu cuenta</p>
+  </div>
+</div>
+
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-5">
+          <p><strong>Nombre:</strong> {{ session.get('nombre') }}</p>
+          <p><strong>Correo:</strong> {{ session.get('correo') }}</p>
+          <p><strong>Rol:</strong> {{ session.get('rol') }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

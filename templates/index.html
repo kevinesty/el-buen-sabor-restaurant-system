@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block title %}El Buen Sabor — Inicio{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero-section">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <div class="hero-badge">🇵🇪 Cocina Peruana Auténtica</div>
+    <h1 class="hero-title">
+      Restaurante<br />
+      <span class="hero-highlight">El Buen Sabor</span>
+    </h1>
+    <p class="hero-subtitle">
+      Donde cada plato cuenta una historia. Descubre la riqueza<br />
+      de la gastronomía peruana en cada bocado.
+    </p>
+    <div class="hero-cta">
+      <a href="/platos" class="btn-primary-hero">
+        <i class="bi bi-star-fill"></i> Ver Reseñas
+      </a>
+      <a href="/dashboard" class="btn-secondary-hero">
+        <i class="bi bi-bar-chart-fill"></i> Estadísticas
+      </a>
+    </div>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="currentColor"/>
+    </svg>
+  </div>
+</section>
+
+<!-- CARRUSEL DE PLATOS DESTACADOS -->
+<section class="carousel-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Platos <span>Destacados</span></h2>
+      <p class="section-sub">Navega entre nuestra selección especial</p>
+    </div>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-arrow left" id="carousel-prev" aria-label="Anterior">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+
+      <div class="carousel-slide">
+        <div class="carousel-img-wrap">
+          <img id="carousel-img" src="{{ url_for('static', filename='img/ceviche.jpg') }}" alt="Plato" />
+        </div>
+        <div class="carousel-info">
+          <h3 id="carousel-nombre">Cargando...</h3>
+          <p id="carousel-desc">Delicioso plato tradicional peruano.</p>
+          <a href="/platos" class="btn-ver-resenas">Ver reseñas <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <button class="carousel-arrow right" id="carousel-next" aria-label="Siguiente">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+
+    <div class="carousel-dots" id="carousel-dots"></div>
+  </div>
+</section>
+
+<!-- STATS RÁPIDAS -->
+<section class="stats-strip">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-icon">🍽️</div>
+        <div class="stat-num" id="stat-platos">—</div>
+        <div class="stat-label">Platos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">👍</div>
+        <div class="stat-num" id="stat-likes">—</div>
+        <div class="stat-label">Likes totales</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">💬</div>
+        <div class="stat-num" id="stat-comentarios">—</div>
+        <div class="stat-label">Reseñas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-num" id="stat-popular">—</div>
+        <div class="stat-label">Más popular</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA PREVIEW -->
+<section class="gallery-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Nuestra <span>Cocina</span></h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item tall">
+        <img src="{{ url_for('static', filename='img/ceviche.jpg') }}" alt="Ceviche" />
+        <div class="gallery-caption">Ceviche</div>
+      </div>
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='img/lomo_saltado.jpeg') }}" alt="Lomo Saltado" />
+        <div class="gallery-caption">Lomo Saltado</div>
+      </div>
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='img/arroz_con_pollo.jpg') }}" alt="Arroz con Pollo" />
+        <div class="gallery-caption">Arroz con Pollo</div>
+      </div>
+      <div class="gallery-item wide">
+        <img src="{{ url_for('static', filename='img/causa.jpg') }}" alt="Causa" />
+        <div class="gallery-caption">Causa Limeña</div>
+      </div>
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='img/tallarines.jpeg') }}" alt="Tallarines" />
+        <div class="gallery-caption">Tallarines</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module">
+  import API from "{{ url_for('static', filename='js/api.js') }}";
+  import UI from "{{ url_for('static', filename='js/ui.js') }}";
+
+  UI.initDarkMode();
+
+  async function initIndex() {
+    try {
+      const platos = await API.getPlatos();
+      // Stats rápidas
+      document.getElementById("stat-platos").textContent = platos.length;
+      document.getElementById("stat-likes").textContent = platos.reduce((s, p) => s + p.likes, 0);
+      document.getElementById("stat-comentarios").textContent = platos.reduce((s, p) => s + (p.total_comentarios || 0), 0);
+      const masPopular = platos.reduce((a, b) => (a.likes > b.likes ? a : b), platos[0]);
+      document.getElementById("stat-popular").textContent = masPopular?.nombre?.split(" ")[0] || "—";
+
+      // Carrusel
+      let idx = 0;
+      const dots = document.getElementById("carousel-dots");
+      dots.innerHTML = platos.map((_, i) => `<span class="carousel-dot${i === 0 ? " active" : ""}"></span>`).join("");
+
+      function showSlide(i) {
+        idx = (i + platos.length) % platos.length;
+        const p = platos[idx];
+        const img = document.getElementById("carousel-img");
+        img.style.opacity = "0";
+        setTimeout(() => { img.src = UI.imagenPorId(p); img.style.opacity = "1"; }, 200);
+        document.getElementById("carousel-nombre").textContent = p.nombre;
+        document.getElementById("carousel-desc").textContent = p.descripcion || "Delicioso plato tradicional peruano.";
+        dots.querySelectorAll(".carousel-dot").forEach((d, j) => d.classList.toggle("active", j === idx));
+      }
+
+      showSlide(0);
+      document.getElementById("carousel-prev").addEventListener("click", () => showSlide(idx - 1));
+      document.getElementById("carousel-next").addEventListener("click", () => showSlide(idx + 1));
+
+      // Auto-avance
+      setInterval(() => showSlide(idx + 1), 4000);
+    } catch (err) {
+      console.error("Error:", err);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", initIndex);
+</script>
+{% endblock %}

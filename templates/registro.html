@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+{% block title %}Registro | El Buen Sabor{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-body p-5">
+
+                    {% with mensajes = get_flashed_messages(with_categories=true) %}
+                        {% if mensajes %}
+                            {% for categoria, mensaje in mensajes %}
+                                <div
+                                    class="alert alert-{{ 'success' if categoria == 'success' else 'danger' }} alert-dismissible fade show"
+                                    role="alert">
+                                    {{ mensaje }}
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="alert"
+                                        aria-label="Cerrar">
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <h2 class="text-center mb-4">
+                        🍽️ Crear Cuenta
+                    </h2>
+
+                    <p class="text-center text-muted mb-4">
+                        Regístrate para disfrutar de nuestros platos favoritos y compartir tus reseñas.
+                    </p>
+
+                        <form id="registroForm" method="POST">
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Nombre
+                            </label>
+
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill"></i>
+                                </span>
+
+                                <input
+                                    type="text"
+                                    maxlength="50"
+                                    class="form-control"
+                                    id="nombre"
+                                    name="nombre"
+                                    placeholder="Ingresa tu nombre">
+                            </div>
+                            <small
+                                id="nombreError"
+                                class="text-danger">
+                            </small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Correo electrónico
+                            </label>
+
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-envelope-fill"></i>
+                                </span>
+
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="correo"
+                                    name="correo"
+                                    maxlength="50"
+                                    placeholder="correo@ejemplo.com">
+                            </div>
+                            <small
+                                id="correoError"
+                                class="text-danger">
+                            </small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Contraseña
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bi bi-lock-fill"></i>
+                                </span>
+
+                                <input
+                                    type="password"
+                                    maxlength="50"
+                                    class="form-control"
+                                    id="password"
+                                    name="password"
+                                    placeholder="********">
+
+                                <button
+                                    class="btn btn-outline-secondary"
+                                    type="button"
+                                    data-password-toggle
+                                    data-password-target="password">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </button>
+
+                            </div>
+                            <small
+                                id="passwordError"
+                                class="text-danger">
+                            </small>
+
+                            <div class="progress mt-2" style="height: 8px;">
+                                <div
+                                    id="passwordStrengthBar"
+                                    class="progress-bar"
+                                    role="progressbar"
+                                    style="width: 0%;">
+                                </div>
+                            </div>
+
+                            <small
+                                id="passwordStrengthText">
+                            </small>
+
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">
+                                Confirmar contraseña
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bi bi-lock-fill"></i>
+                                </span>
+
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="confirm_password"
+                                    maxlength="50"
+                                    name="confirm_password"
+                                    placeholder="********">
+
+                                <button
+                                    class="btn btn-outline-secondary"
+                                    type="button"
+                                    data-password-toggle
+                                    data-password-target="confirm_password"
+
+                                    <i class="bi bi-eye"></i>
+
+                                </button>
+
+                            </div>
+                            <small
+                                id="confirmPasswordError"
+                                class="text-danger">
+                            </small>
+                        </div>
+                        <button
+                            class="btn btn-warning w-100">
+
+                            Registrarme
+
+                        </button>
+
+                    </form>
+
+                    <hr>
+
+                    <p class="text-center">
+
+                        ¿Ya tienes cuenta?
+
+                        <a href="/login">
+                            Inicia sesión
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script type="module"
+        src="{{ url_for('static', filename='js/ui.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/registro.js') }}"></script>
+x
+{% endblock %}

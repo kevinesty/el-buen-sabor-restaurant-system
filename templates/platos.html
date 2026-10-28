@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Reseñas — El Buen Sabor{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-title">Reseñas de <span>Platos</span></h1>
+    <p class="page-sub">Descubre qué piensan nuestros clientes sobre la cocina peruana</p>
+  </div>
+</div>
+
+<section class="platos-section">
+  <div class="container">
+
+    <!-- BARRA DE BÚSQUEDA Y FILTROS -->
+    <div class="toolbar">
+      <div class="search-wrap">
+        <i class="bi bi-search search-icon"></i>
+        <input
+          type="text"
+          id="buscador"
+          class="search-input"
+          placeholder="Buscar plato..."
+          autocomplete="off"
+        />
+      </div>
+      <div class="filtros-wrap">
+        <button class="btn-filtro active" data-filtro="todos">
+          <i class="bi bi-grid-3x3-gap-fill"></i> Todos
+        </button>
+        <button class="btn-filtro" data-filtro="mas-populares">
+          <i class="bi bi-fire"></i> Más populares
+        </button>
+        <button class="btn-filtro" data-filtro="menos-populares">
+          <i class="bi bi-arrow-down-circle"></i> Menos populares
+        </button>
+        <button class="btn-filtro" data-filtro="mas-comentados">
+          <i class="bi bi-chat-dots-fill"></i> Más comentados
+        </button>
+      </div>
+    </div>
+
+    <!-- GRID DE PLATOS -->
+    <div id="platos-grid" class="platos-grid">
+      <!-- Se renderiza con JS -->
+      <div class="loading-skeleton">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% block title %}Administración — El Buen Sabor{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin-panel.css') }}" />
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-title">Panel de <span>Administración</span></h1>
+    <p class="page-sub">Gestiona los platos del restaurante</p>
+  </div>
+</div>
+
+<!-- ═══════════ RESUMEN DEL PANEL ═══════════ -->
+<section class="admin-panel-section">
+  <div class="container">
+
+    <!-- KPIs -->
+    <div class="kpi-grid">
+      <div class="kpi-card kpi-likes">
+        <div class="kpi-icon">👍</div>
+        <div class="kpi-data">
+          <div class="kpi-val" id="kpi-likes">—</div>
+          <div class="kpi-label">Total Likes</div>
+        </div>
+      </div>
+      <div class="kpi-card kpi-dislikes">
+        <div class="kpi-icon">👎</div>
+        <div class="kpi-data">
+          <div class="kpi-val" id="kpi-dislikes">—</div>
+          <div class="kpi-label">Total Dislikes</div>
+        </div>
+      </div>
+      <div class="kpi-card kpi-comentarios">
+        <div class="kpi-icon">💬</div>
+        <div class="kpi-data">
+          <div class="kpi-val" id="kpi-comentarios">—</div>
+          <div class="kpi-label">Total Reseñas</div>
+        </div>
+      </div>
+      <div class="kpi-card kpi-popular">
+        <div class="kpi-icon">⭐</div>
+        <div class="kpi-data">
+          <div class="kpi-val kpi-val-sm" id="kpi-popular">—</div>
+          <div class="kpi-label">Más Popular</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Acciones rápidas -->
+    <div class="chart-card">
+      <h3 class="chart-title">⚡ Acciones rápidas</h3>
+      <div class="quick-actions-grid">
+        <button type="button" class="btn-admin-nuevo" id="qa-nuevo-plato">
+          <i class="bi bi-plus-circle-fill"></i> Nuevo plato
+        </button>
+        <button type="button" class="btn-quick-action" id="qa-gestionar-platos">
+          <i class="bi bi-egg-fried"></i> Gestionar platos
+        </button>
+      </div>
+    </div>
+
+    <!-- Resumen de actividad -->
+    <div class="chart-card">
+      <h3 class="chart-title">🕓 Resumen de actividad</h3>
+      <ul class="activity-list" id="activity-list">
+        <li class="activity-item text-muted">Cargando...</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="admin-section" id="gestion-platos">
+  <div class="container">
+
+    <div class="admin-toolbar">
+      <button class="btn-admin-nuevo" id="btn-nuevo">
+        <i class="bi bi-plus-circle-fill"></i> Nuevo Plato
+      </button>
+    </div>
+
+    <!-- TABLA ADMIN -->
+    <div class="admin-table-wrap">
+      <table class="table admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Plato</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Votos</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="admin-tbody">
+          <tr><td colspan="6" class="text-center py-4">Cargando...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODAL CREAR / EDITAR -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-card">
+    <h3 class="modal-titulo" id="modal-titulo">Nuevo Plato</h3>
+    <form id="form-plato" novalidate>
+      <div class="form-group">
+        <label>Nombre <span class="req">*</span></label>
+        <input type="text" id="input-nombre" class="form-control" placeholder="Ej. Ceviche Clásico" required />
+      </div>
+      <div class="form-group">
+        <label>Descripción</label>
+        <textarea id="input-descripcion" class="form-control" rows="3" placeholder="Describe el plato..."></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Precio (S/)</label>
+          <input type="number" id="input-precio" class="form-control" placeholder="0.00" step="0.01" min="0" />
+        </div>
+        <div class="form-group">
+          <label>Imagen (nombre de archivo)</label>
+          <input type="text" id="input-imagen" class="form-control" placeholder="ceviche.jpg" />
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-cancelar" id="btn-cancelar">Cancelar</button>
+        <button type="submit" class="btn-guardar" id="btn-guardar">
+          <i class="bi bi-check2-circle"></i> Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL CONFIRMACIÓN ELIMINAR -->
+<div class="modal-overlay" id="confirm-overlay">
+  <div class="modal-card confirm-card">
+    <div class="confirm-icon">🗑️</div>
+    <h3>¿Eliminar plato?</h3>
+    <p>Esto eliminará <strong id="confirm-nombre"></strong> y todos sus comentarios. Esta acción no se puede deshacer.</p>
+    <div class="modal-actions">
+      <button class="btn-cancelar" id="btn-confirm-no">Cancelar</button>
+      <button class="btn-eliminar" id="btn-confirm-si">Sí, eliminar</button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{{ url_for('static', filename='js/admin-panel.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

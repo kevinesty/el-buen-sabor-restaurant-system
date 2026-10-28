@@ -1,0 +1,63 @@
+<ul class="navbar-nav ms-auto align-items-center gap-1">
+  <li class="nav-item">
+    <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{{ url_for('index') }}">
+      Inicio
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link {% if request.path == '/platos' %}active{% endif %}" href="{{ url_for('platos') }}">
+      Reseñas
+    </a>
+  </li>
+
+  {% if session.get('usuario_id') %}
+
+    <li class="nav-item">
+      <a class="nav-link {% if request.path == '/dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}">
+        Dashboard
+      </a>
+    </li>
+
+    {% if session.get('rol') == 'admin' %}
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == '/admin' %}active{% endif %}" href="{{ url_for('admin') }}">
+          Panel Administrador
+        </a>
+      </li>
+    {% endif %}
+
+    <li class="nav-item">
+      <a class="nav-link {% if request.path == '/perfil' %}active{% endif %}" href="{{ url_for('usuarios.vista_perfil') }}">
+        Mi perfil
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('usuarios.logout') }}">
+        Cerrar sesión
+      </a>
+    </li>
+
+  {% else %}
+
+    <li class="nav-item">
+      <a class="nav-link {% if request.path == '/login' %}active{% endif %}" href="{{ url_for('usuarios.vista_login') }}">
+        Iniciar sesión
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link {% if request.path == '/registro' %}active{% endif %}" href="{{ url_for('usuarios.vista_registro') }}">
+        Registrarse
+      </a>
+    </li>
+
+  {% endif %}
+
+  <li class="nav-item ms-2">
+    <button id="dark-mode-toggle" class="btn-dark-toggle" aria-label="Cambiar tema">
+      <i class="bi bi-moon-fill"></i>
+    </button>
+  </li>
+</ul>

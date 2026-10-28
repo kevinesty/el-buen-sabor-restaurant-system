@@ -1,0 +1,135 @@
+*{ 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    width: 100%;
+    height: 600px;
+    background: #DCE35B;
+    background: -webkit-linear-gradient(
+        to right,
+        hsla(122, 45%, 49%, 0.705),
+        hsla(63, 71%, 62%, 0.705)
+    ),
+    url("/static/img/portada.jpg");
+    background: linear-gradient(
+        to right,
+        hsla(122, 45%, 49%, 0.705),
+        hsla(63, 71%, 62%, 0.705)
+    ),
+    url("/static/img/portada.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+nav {
+    text-align: right;
+    padding: 30px 50px 0 0;
+}
+
+nav > a {
+    color: #ffffff;
+    font-weight: 300;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+nav > a:hover {
+    text-decoration: underline;
+}
+
+header .textos-header {
+    display: flex;
+    height: 300px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.textos-header h1 {
+    font-size: 50px;
+    color: #ffffff;
+}
+
+.textos-header h2 {
+    font-size: 30px;
+    font-weight: 300;
+    color: #ffffff;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.contenedor-reseña {
+    padding: 50px;
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.contenedor-reseña h2 {
+    color: #0056cc;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.contenedor-reseña p {
+    text-align: center;
+}
+
+.boton-contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.boton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #66fc7a;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+    background-color: #0056cc;
+}
+
+footer {
+    background: #DCE35B;
+    background: -webkit-linear-gradient(to right, #45B649, #DCE35B);
+    background: linear-gradient(to right, #45B649, #DCE35B);
+    padding: 30px 0 30px 0;
+    margin: auto;
+    overflow: hidden;
+}
+
+footer > p {
+    justify-content: center;
+    text-align: center;
+}
+
+.header-fondo {
+    background-image: url("/static/img/fondo_inicio.jpg");
+    background-size: cover;
+    background-position: center;
+}

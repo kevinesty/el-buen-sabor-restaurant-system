@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — El Buen Sabor{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-title">Dashboard de <span>Estadísticas</span></h1>
+    <p class="page-sub">Análisis de popularidad y engagement de los platos</p>
+  </div>
+</div>
+
+<section class="dashboard-section">
+  <div class="container">
+
+    <!-- KPIs -->
+    <div class="kpi-grid">
+      <div class="kpi-card kpi-likes">
+        <div class="kpi-icon">👍</div>
+        <div class="kpi-data">
+          <div class="kpi-val" id="kpi-likes">—</div>
+          <div class="kpi-label">Total Likes</div>
+        </div>
+      </div>
+      <div class="kpi-card kpi-dislikes">
+        <div class="kpi-icon">👎</div>
+        <div class="kpi-data">
+          <div class="kpi-val" id="kpi-dislikes">—</div>
+          <div class="kpi-label">Total Dislikes</div>
+        </div>
+      </div>
+      <div class="kpi-card kpi-comentarios">
+        <div class="kpi-icon">💬</div>
+        <div class="kpi-data">
+          <div class="kpi-val" id="kpi-comentarios">—</div>
+          <div class="kpi-label">Total Reseñas</div>
+        </div>
+      </div>
+      <div class="kpi-card kpi-popular">
+        <div class="kpi-icon">⭐</div>
+        <div class="kpi-data">
+          <div class="kpi-val kpi-val-sm" id="kpi-popular">—</div>
+          <div class="kpi-label">Más Popular</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRÁFICOS -->
+    <div class="charts-grid">
+      <div class="chart-card chart-wide">
+        <h3 class="chart-title">👍 Likes vs Dislikes por plato</h3>
+        <div class="chart-wrap">
+          <canvas id="chart-likes"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">💬 Distribución de Reseñas</h3>
+        <div class="chart-wrap">
+          <canvas id="chart-comentarios"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">📡 Radar de Popularidad</h3>
+        <div class="chart-wrap">
+          <canvas id="chart-popularidad"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="stats-table-card">
+      <h3 class="chart-title">🏆 Ranking de Platos</h3>
+      <div class="table-responsive">
+        <table class="table stats-table">
+          <thead>
+            <tr>
+              <th>Pos.</th>
+              <th>Plato</th>
+              <th>Likes</th>
+              <th>Dislikes</th>
+              <th>Reseñas</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-stats">
+            <tr><td colspan="6" class="text-center">Cargando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script type="module">
+  import Dashboard from "{{ url_for('static', filename='js/dashboard.js') }}";
+  import UI from "{{ url_for('static', filename='js/ui.js') }}";
+  document.addEventListener("DOMContentLoaded", () => {
+    UI.initDarkMode();
+    Dashboard.init();
+  });
+</script>
+{% endblock %}
