@@ -33,7 +33,19 @@ The application follows the **Model-View-Controller (MVC)** pattern to organize 
 
 ## 📸 Screenshots
 
-Screenshots of the application will be added here.
+## 📸 Screenshots
+
+### Home page
+![Home page](screenshots/home.png)
+
+### Login
+![Login](screenshots/login.png)
+
+### Admin dashboard
+![Admin dashboard](screenshots/admin.png)
+
+### Statistics dashboard
+![Statistics dashboard](screenshots/dashboard.png)
 
 ## 🚀 Getting Started
 
